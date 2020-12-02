@@ -8,10 +8,12 @@ namespace Day1
     {
         static void Main(string[] args)
         {
-            var expenses = GetExpenses();
+            var numbers = GetListOfNumbers();
+			var twoNumbersThatAddUpTo2020 = FindTwoNumbersThatAddUpTo2020(numbers);
+			var twoNumbersMultipliedTogether = twoNumbersThatAddUpTo2020.Aggregate((num1, num2) => num1 * num2);
 
-            FindAndMultiplyTwoNumbersThatAddUpTo2020(expenses);
-            FindAndMultiplyThreeNumbersThatAddUpTo2020(expenses);
+			Console.WriteLine("Found numbers {0} and {1} that add up to 2020.", twoNumbersThatAddUpTo2020[0], twoNumbersThatAddUpTo2020[1]);
+			Console.WriteLine("Multiplied together these numbers equal {0}.", twoNumbersMultipliedTogether);
         }
 
 		private static void FindAndMultiplyTwoNumbersThatAddUpTo2020(List<int> expenses)
@@ -49,7 +51,12 @@ namespace Day1
 			}
 		}
 
-		private static List<int> GetExpenses()
+		private static List<int> FindTwoNumbersThatAddUpTo2020(List<int> numbers)
+        {
+            return numbers.Where(num => numbers.Any(secondNum => secondNum + num == 2020)).ToList();
+        }
+
+		private static List<int> GetListOfNumbers()
 		{
 			return new List<int> {
 				1593,
