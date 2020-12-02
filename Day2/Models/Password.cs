@@ -1,4 +1,8 @@
-﻿namespace Day2.Models
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Day2.Models
 {
     public class Password
     {
@@ -7,16 +11,12 @@
             var splitPasswordString = passwordString.Split(" ");
             var splitPasswordPolicy = splitPasswordString[0].Split("-");
 
-            PasswordPolicy = new PasswordPolicy
-            {
-                MinAmount = int.Parse(splitPasswordPolicy[0]),
-                MaxAmount = int.Parse(splitPasswordPolicy[1])
-            };
+            PolicyNumbers = splitPasswordPolicy.Select(int.Parse).ToList();
             Character = char.Parse(splitPasswordString[1].Trim(':'));
             PasswordText = splitPasswordString[2];
         }
 
-        public PasswordPolicy PasswordPolicy { get; set; }
+        public List<int> PolicyNumbers { get; set; }
 
         public char Character { get; set; }
 

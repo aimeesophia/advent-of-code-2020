@@ -1,77 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using Day2.Models;
+using Day2.Enums;
 
 namespace Day2
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            var passwords = CreatePasswordObjects(GetPasswords());
-            var numberOfValidPasswords = GetNumberOfValidPasswords(passwords);
-            var numberOfValidPasswordsSolutionTwo = GetNumberOfValidPasswordsSolutionTwo(passwords);
+            var passwordDatabaseList = GetPasswordDatabaseList();
 
-            Console.WriteLine("Number of valid passwords: {0}", numberOfValidPasswords);
-            Console.WriteLine("Number of valid passwords for solution two: {0}", numberOfValidPasswordsSolutionTwo);
+            var numberOfValidMinMaxAmountOfRequiredCharacterPasswords = PasswordValidator.Validate(ValidationType.MinMaxAmountOfRequiredCharacter, passwordDatabaseList);
+            var numberOfValidPositionOfRequiredCharacterPasswords = PasswordValidator.Validate(ValidationType.PositionOfRequiredCharacter, passwordDatabaseList);
+
+            Console.WriteLine("The number of valid passwords using the min/max amount of required character validation type is: {0}", numberOfValidMinMaxAmountOfRequiredCharacterPasswords);
+            Console.WriteLine("The number of valid passwords using the position of required character validation type is: {0}", numberOfValidPositionOfRequiredCharacterPasswords);
         }
 
-        private static List<Password> CreatePasswordObjects(List<string> passwords)
-        {
-            var passwordObjects = new List<Password>();
-
-            foreach (var password in passwords)
-            {
-                passwordObjects.Add(new Password(password));
-            }
-
-            return passwordObjects;
-        }
-
-        private static int GetNumberOfValidPasswords(List<Password> passwords)
-        {
-            var numberOfValidPasswords = 0;
-
-            foreach (var password in passwords)
-            {
-                var passwordTextCharacters = password.PasswordText.ToCharArray().ToList();
-                var numberOfRequiredCharacter = passwordTextCharacters.Count(character => character.Equals(password.Character));
-
-                if (numberOfRequiredCharacter >= password.PasswordPolicy.MinAmount &&
-                    numberOfRequiredCharacter <= password.PasswordPolicy.MaxAmount)
-                {
-                    numberOfValidPasswords++;
-                }
-            }
-
-            return numberOfValidPasswords;
-        }
-
-        private static int GetNumberOfValidPasswordsSolutionTwo(List<Password> passwords)
-        {
-            var numberOfValidPasswords = 0;
-
-            foreach (var password in passwords)
-            {
-                var passwordTextCharacters = password.PasswordText.ToCharArray().ToList();
-
-                if (passwordTextCharacters.Count >= password.PasswordPolicy.MaxAmount)
-                {
-                    if ((passwordTextCharacters[password.PasswordPolicy.MinAmount - 1] == password.Character ||
-                        passwordTextCharacters[password.PasswordPolicy.MaxAmount - 1] == password.Character) &&
-                        !(passwordTextCharacters[password.PasswordPolicy.MinAmount - 1] == password.Character &&
-                         passwordTextCharacters[password.PasswordPolicy.MaxAmount - 1] == password.Character))
-                    {
-                        numberOfValidPasswords++;
-                    }
-                }
-            }
-
-            return numberOfValidPasswords;
-        }
-
-        private static List<string> GetPasswords()
+        private static List<string> GetPasswordDatabaseList()
         {
             return new List<string>
             {
