@@ -2,7 +2,7 @@ using NUnit.Framework;
 
 namespace Day3.Tests
 {
-    public class Tests
+    public class MapNavigatorTests
     {
         private string[] _map;
 
