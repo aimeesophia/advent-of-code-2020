@@ -16,4 +16,10 @@
     <ProjectReference Include="..\Day10\Day10.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Data\Data.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
