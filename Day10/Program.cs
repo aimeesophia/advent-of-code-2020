@@ -12,6 +12,7 @@ namespace Day10
             var result = adapterArray.GetJoltage();
 
             Console.WriteLine("The number of 1-jolt differences multiplied by the number of 3-jolt differences is: {0}", result);
+            Console.WriteLine("The number of adapter arrangements is: {0}", adapterArray.GetNumberOfArrangements());
         }
     }
 }

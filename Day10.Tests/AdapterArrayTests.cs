@@ -26,5 +26,18 @@ namespace Day10.Tests
             // Assert
             Assert.AreEqual(expectedResult, actualResult);
         }
+
+        [Test]
+        public void AdapterArray_GetNumberOfArrangements_Returns_Joltage_Multiplier()
+        {
+            // Arrange
+            var expectedResult = 19208;
+
+            // Act
+            var actualResult = _adapterArray.GetNumberOfArrangements();
+
+            // Assert
+            Assert.AreEqual(expectedResult, actualResult);
+        }
     }
 }
